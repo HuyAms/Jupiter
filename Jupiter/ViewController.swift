@@ -20,6 +20,13 @@ class ViewController: UITableViewController {
     
     @objc func handleOpen() {
         print("Open..")
+        
+        let vc = MenuController()
+        
+        vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: self.view.frame.height)
+        
+        let mainWindow = UIApplication.shared.keyWindow
+        mainWindow?.addSubview(vc.view)
     }
     
     @objc func handleHide() {
@@ -41,7 +48,5 @@ class ViewController: UITableViewController {
         cell.textLabel?.text = "Row \(indexPath.row)"
         return cell
     }
-
-
 }
 
