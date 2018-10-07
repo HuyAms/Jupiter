@@ -5,10 +5,9 @@
 //  Created by HuyTrinh on 07/10/2018.
 //  Copyright © 2018 HuyTrinh. All rights reserved.
 //
-
 import UIKit
 
-class ViewController: UITableViewController {
+class HomeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,19 +17,38 @@ class ViewController: UITableViewController {
         setupNavigationItem()
     }
     
+    let menuController = MenuController()
+    
+    fileprivate let menuWitdh: CGFloat = 300
+    
     @objc func handleOpen() {
-        print("Open..")
         
-        let vc = MenuController()
-        
-        vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: self.view.frame.height)
+        //Initial position
+        menuController.view.frame = CGRect(x: -menuWitdh, y: 0, width: menuWitdh, height: self.view.frame.height)
         
         let mainWindow = UIApplication.shared.keyWindow
-        mainWindow?.addSubview(vc.view)
+        mainWindow?.addSubview(menuController.view)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
+            //Final position
+            self.menuController.view.transform = CGAffineTransform(translationX: self.menuWitdh, y: 0)
+        }, completion: nil)
+        
+        addChild(menuController)
+        
     }
     
     @objc func handleHide() {
-        print("Hide..")
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
+            //Final position
+            self.menuController.view.transform = .identity
+        }, completion: nil)
+        
+//        menuController.view.removeFromSuperview()
+//        menuController.removeFromParent()
     }
     
     fileprivate func setupNavigationItem() {
