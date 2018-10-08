@@ -27,9 +27,13 @@ class HomeController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hide", style: .plain, target: self, action: #selector(handleHide))
     }
     
-    @objc fileprivate func handleOpen() {}
+    @objc fileprivate func handleOpen() {
+        (UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController)?.openMenu()
+    }
     
-    @objc fileprivate func handleHide() {}
+    @objc fileprivate func handleHide() {
+        (UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController)?.closeMenu()
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
