@@ -24,12 +24,10 @@ class HomeController: UITableViewController {
         
         setupMenuController()
         
-        //Pan Gesture
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(panGesture)
+        setupPanGesture()
+        
+        setupDarkCoverView()
     }
-    
-
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
         
@@ -48,9 +46,52 @@ class HomeController: UITableViewController {
             let transform = CGAffineTransform(translationX: x, y: 0)
             menuController.view.transform = transform
             navigationController?.view.transform = transform
+            darkCoverView.transform = transform
+            
+            let alpha = x / menuWitdh
+            darkCoverView.alpha = alpha
+            
         } else if gesture.state == .ended {
             handleEnded(gesture: gesture)
         }
+    }
+
+    
+    @objc func handleOpen() {
+        
+        isMenuOpen = true
+        
+        performAnimations(transform: CGAffineTransform(translationX: self.menuWitdh, y: 0))
+    }
+    
+    @objc func handleHide() {
+        
+        isMenuOpen = false
+        
+        performAnimations(transform: .identity)
+        
+//        menuController.view.removeFromSuperview()
+//        menuController.removeFromParent()
+    }
+    
+    // MARK: - Fileprivate
+    
+    let darkCoverView = UIView()
+    
+    fileprivate func setupDarkCoverView() {
+        darkCoverView.alpha = 0
+        darkCoverView.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        darkCoverView.isUserInteractionEnabled = false
+        
+        let mainWindow = UIApplication.shared.keyWindow
+        mainWindow?.addSubview(darkCoverView)
+        
+        darkCoverView.frame = mainWindow?.frame ?? .zero
+    }
+    
+    fileprivate func setupPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(panGesture)
     }
     
     fileprivate func handleEnded(gesture: UIPanGestureRecognizer) {
@@ -60,7 +101,6 @@ class HomeController: UITableViewController {
         let velocity = gesture.velocity(in: view)
         
         if isMenuOpen {
-            
             if abs(velocity.x) > velocityOpenThreshold {
                 handleHide()
                 return
@@ -72,7 +112,6 @@ class HomeController: UITableViewController {
                 handleHide()
             }
         } else {
-            
             if velocity.x > velocityOpenThreshold {
                 handleOpen()
                 return
@@ -86,33 +125,16 @@ class HomeController: UITableViewController {
         }
     }
     
-    @objc func handleOpen() {
-        
-        isMenuOpen = true
-        
-        performAnimations(tranform: CGAffineTransform(translationX: self.menuWitdh, y: 0))
-    }
-    
-    @objc func handleHide() {
-        
-        isMenuOpen = false
-        
-        performAnimations(tranform: .identity)
-        
-//        menuController.view.removeFromSuperview()
-//        menuController.removeFromParent()
-    }
-    
-    // MARK: - Fileprivate
-    
-    fileprivate func performAnimations(tranform: CGAffineTransform) {
-        
+    fileprivate func performAnimations(transform: CGAffineTransform) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
             //Final position
-            self.menuController.view.transform = tranform
+            self.menuController.view.transform = transform
 //            self.view.transform = tranform
-            self.navigationController?.view.transform = tranform
+            self.navigationController?.view.transform = transform
+            self.darkCoverView.transform = transform
+            
+            self.darkCoverView.alpha = transform == .identity ? 0 : 1
         })
     }
     
