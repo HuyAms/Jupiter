@@ -9,24 +9,53 @@
 import UIKit
 
 class CustomMenuHeaderView: UIView {
-
+    
+    let nameLabel = UILabel()
+    let usernameLabel = UILabel()
+    let statsLabel = UILabel()
+    let profileImageView = ProfileImageView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .white
         
-        let nameLabel = UILabel()
+        setupComponentProps()
+        
+        setupStackView()
+    }
+    
+    fileprivate func setupComponentProps() {
         nameLabel.text = "Huy Trinh"
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        
-        let usernameLabel = UILabel()
         usernameLabel.text = "@huytrinh"
-        
-        let statsLabel = UILabel()
         statsLabel.text = "42 Following 7091 Followers"
+        profileImageView.image = UIImage(named: "profile")
+        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.layer.cornerRadius = 48 / 2
+        profileImageView.clipsToBounds = true
         
+        setupStatsAttributedText()
+    }
+    
+    fileprivate func setupStatsAttributedText() {
+        statsLabel.font = UIFont.systemFont(ofSize: 14)
+        let attributedText = NSMutableAttributedString(string: "2312 ", attributes: [.font: UIFont.systemFont(ofSize: 17, weight: .medium)])
+        attributedText.append(NSAttributedString(string: "Following  ", attributes: [.foregroundColor: UIColor.black]))
+        attributedText.append(NSAttributedString(string: "2017 ", attributes: [.font: UIFont.systemFont(ofSize: 17, weight: .medium)]))
+        attributedText.append(NSAttributedString(string: "Followers  ", attributes: [.foregroundColor: UIColor.black]))
+        
+        statsLabel.attributedText = attributedText
+    }
+    
+    fileprivate func setupStackView() {
         let arrangedSubviews = [
-            UIView(), nameLabel, usernameLabel, SpacerView(space: 16), statsLabel
+            UIView(),
+            UIStackView(arrangedSubviews: [profileImageView, UIView()]),
+            nameLabel,
+            usernameLabel,
+            SpacerView(space: 16),
+            statsLabel
         ]
         
         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)

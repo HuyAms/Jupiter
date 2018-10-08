@@ -16,6 +16,7 @@
 		16F24935216B3C860025A061 /* BaseSlidingControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24934216B3C860025A061 /* BaseSlidingControler.swift */; };
 		16F24938216B57810025A061 /* CustomMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24937216B57810025A061 /* CustomMenuHeaderView.swift */; };
 		16F2493A216B5DAD0025A061 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24939216B5DAD0025A061 /* SpacerView.swift */; };
+		16F2493E216B625D0025A061 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F2493D216B625D0025A061 /* ProfileImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		16F24934216B3C860025A061 /* BaseSlidingControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSlidingControler.swift; sourceTree = "<group>"; };
 		16F24937216B57810025A061 /* CustomMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuHeaderView.swift; sourceTree = "<group>"; };
 		16F24939216B5DAD0025A061 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
+		16F2493D216B625D0025A061 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				16F24937216B57810025A061 /* CustomMenuHeaderView.swift */,
 				16F24939216B5DAD0025A061 /* SpacerView.swift */,
+				16F2493D216B625D0025A061 /* ProfileImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1685184B216A90F800FAD779 /* MenuController.swift in Sources */,
+				16F2493E216B625D0025A061 /* ProfileImageView.swift in Sources */,
 				16851838216A85BD00FAD779 /* AppDelegate.swift in Sources */,
 				16F2493A216B5DAD0025A061 /* SpacerView.swift in Sources */,
 				16F24935216B3C860025A061 /* BaseSlidingControler.swift in Sources */,
