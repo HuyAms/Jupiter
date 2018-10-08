@@ -18,6 +18,7 @@
 		16F2493A216B5DAD0025A061 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24939216B5DAD0025A061 /* SpacerView.swift */; };
 		16F2493E216B625D0025A061 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F2493D216B625D0025A061 /* ProfileImageView.swift */; };
 		16F24940216B6AC20025A061 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F2493F216B6AC20025A061 /* MenuItemCell.swift */; };
+		16F24942216B76A60025A061 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24941216B76A60025A061 /* ListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		16F24939216B5DAD0025A061 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		16F2493D216B625D0025A061 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		16F2493F216B6AC20025A061 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		16F24941216B76A60025A061 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				16F24933216B3C6F0025A061 /* Base */,
 				1685184A216A90F800FAD779 /* MenuController.swift */,
 				1685184C216A92D000FAD779 /* HomeController.swift */,
+				16F24941216B76A60025A061 /* ListController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			files = (
 				1685184B216A90F800FAD779 /* MenuController.swift in Sources */,
 				16F24940216B6AC20025A061 /* MenuItemCell.swift in Sources */,
+				16F24942216B76A60025A061 /* ListController.swift in Sources */,
 				16F2493E216B625D0025A061 /* ProfileImageView.swift in Sources */,
 				16851838216A85BD00FAD779 /* AppDelegate.swift in Sources */,
 				16F2493A216B5DAD0025A061 /* SpacerView.swift in Sources */,
