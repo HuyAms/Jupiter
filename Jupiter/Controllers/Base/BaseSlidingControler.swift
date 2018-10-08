@@ -24,6 +24,14 @@ class BaseSlidingController: UIViewController {
         return v
     }()
     
+    let darkCoverView: UIView = {
+        let v = UIView()
+        v.alpha = 0
+        v.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,6 +49,7 @@ class BaseSlidingController: UIViewController {
     
     var redViewLeadingConstraint: NSLayoutConstraint!
     fileprivate let menuWidth: CGFloat = 300
+    fileprivate let velocityOpenThreshold: CGFloat = 500
     fileprivate var isMenuOpen = false
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
@@ -53,6 +62,7 @@ class BaseSlidingController: UIViewController {
         x = max(0, x)
 
         redViewLeadingConstraint.constant = x
+        darkCoverView.alpha = x / menuWidth
         
         if gesture.state == .ended {
             handleEnded(gesture: gesture)
@@ -61,18 +71,31 @@ class BaseSlidingController: UIViewController {
     
     fileprivate func handleEnded(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
         
-        if translation.x < menuWidth / 2 {
-            redViewLeadingConstraint.constant = 0
-            isMenuOpen = false
+        if isMenuOpen {
+            if abs(velocity.x) > velocityOpenThreshold {
+                closeMenu()
+                return
+            }
+            
+            if abs(translation.x) < menuWidth / 2 {
+                openMenu()
+            } else {
+                closeMenu()
+            }
         } else {
-            redViewLeadingConstraint.constant = menuWidth
-            isMenuOpen = true
+            if velocity.x > velocityOpenThreshold {
+                closeMenu()
+                return
+            }
+            
+            if translation.x < menuWidth / 2 {
+                closeMenu()
+            } else {
+                openMenu()
+            }
         }
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-        })
     }
     
     fileprivate func setupViews() {
@@ -109,6 +132,7 @@ class BaseSlidingController: UIViewController {
         menuView.translatesAutoresizingMaskIntoConstraints = false
         
         redView.addSubview(homeView)
+        redView.addSubview(darkCoverView)
         blueView.addSubview(menuView)
         
         NSLayoutConstraint.activate([
@@ -116,6 +140,11 @@ class BaseSlidingController: UIViewController {
             homeView.leadingAnchor.constraint(equalTo: redView.leadingAnchor),
             homeView.bottomAnchor.constraint(equalTo: redView.bottomAnchor),
             homeView.trailingAnchor.constraint(equalTo: redView.trailingAnchor),
+            
+            darkCoverView.topAnchor.constraint(equalTo: redView.topAnchor),
+            darkCoverView.leadingAnchor.constraint(equalTo: redView.leadingAnchor),
+            darkCoverView.bottomAnchor.constraint(equalTo: redView.bottomAnchor),
+            darkCoverView.trailingAnchor.constraint(equalTo: redView.trailingAnchor),
             
             menuView.topAnchor.constraint(equalTo: blueView.topAnchor),
             menuView.leadingAnchor.constraint(equalTo: blueView.leadingAnchor),
@@ -125,5 +154,24 @@ class BaseSlidingController: UIViewController {
         
         addChild(homeController)
         addChild(menuController)
+    }
+    
+    fileprivate func openMenu() {
+        isMenuOpen = true
+        redViewLeadingConstraint.constant = menuWidth
+        performAnimations()
+    }
+    
+    fileprivate func closeMenu() {
+        isMenuOpen = false
+        redViewLeadingConstraint.constant = 0
+        performAnimations()
+    }
+    
+    fileprivate func performAnimations() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+            self.darkCoverView.alpha = self.isMenuOpen ? 1 : 0
+        })
     }
 }
