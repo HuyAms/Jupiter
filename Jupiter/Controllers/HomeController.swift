@@ -9,6 +9,12 @@ import UIKit
 
 class HomeController: UITableViewController {
     
+    let menuController = MenuController()
+    
+    fileprivate let menuWitdh: CGFloat = 300
+    fileprivate let velocityOpenThreshold: CGFloat = 500
+    fileprivate var isMenuOpen = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +37,11 @@ class HomeController: UITableViewController {
         
         if gesture.state == .changed {
             var x = translation.x
+            
+            if isMenuOpen {
+                x += menuWitdh
+            }
+            
             x = min(menuWitdh, x)
             x = max(0, x)
             
@@ -38,16 +49,53 @@ class HomeController: UITableViewController {
             menuController.view.transform = transform
             navigationController?.view.transform = transform
         } else if gesture.state == .ended {
-            handleOpen()
+            handleEnded(gesture: gesture)
+        }
+    }
+    
+    fileprivate func handleEnded(gesture: UIPanGestureRecognizer) {
+        
+        let translation = gesture.translation(in: view)
+        
+        let velocity = gesture.velocity(in: view)
+        
+        if isMenuOpen {
+            
+            if abs(velocity.x) > velocityOpenThreshold {
+                handleHide()
+                return
+            }
+            
+            if abs(translation.x) < menuWitdh / 2 {
+                handleOpen()
+            } else {
+                handleHide()
+            }
+        } else {
+            
+            if velocity.x > velocityOpenThreshold {
+                handleOpen()
+                return
+            }
+            
+            if translation.x < menuWitdh / 2 {
+                handleHide()
+            } else {
+                handleOpen()
+            }
         }
     }
     
     @objc func handleOpen() {
         
+        isMenuOpen = true
+        
         performAnimations(tranform: CGAffineTransform(translationX: self.menuWitdh, y: 0))
     }
     
     @objc func handleHide() {
+        
+        isMenuOpen = false
         
         performAnimations(tranform: .identity)
         
@@ -56,10 +104,6 @@ class HomeController: UITableViewController {
     }
     
     // MARK: - Fileprivate
-    
-    let menuController = MenuController()
-    
-    fileprivate let menuWitdh: CGFloat = 300
     
     fileprivate func performAnimations(tranform: CGAffineTransform) {
         
