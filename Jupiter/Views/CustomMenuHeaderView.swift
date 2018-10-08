@@ -30,7 +30,7 @@ class CustomMenuHeaderView: UIView {
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         usernameLabel.text = "@huytrinh"
         statsLabel.text = "42 Following 7091 Followers"
-        profileImageView.image = UIImage(named: "profile")
+        profileImageView.image = UIImage(named: "huy_profile")
         profileImageView.contentMode = .scaleAspectFit
         profileImageView.layer.cornerRadius = 48 / 2
         profileImageView.clipsToBounds = true
