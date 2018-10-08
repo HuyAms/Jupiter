@@ -24,7 +24,7 @@ class HomeController: UITableViewController {
         
         setupMenuController()
         
-        setupPanGesture()
+//        setupPanGesture()
         
         setupDarkCoverView()
     }
