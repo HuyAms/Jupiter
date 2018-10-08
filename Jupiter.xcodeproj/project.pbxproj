@@ -19,6 +19,7 @@
 		16F2493E216B625D0025A061 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F2493D216B625D0025A061 /* ProfileImageView.swift */; };
 		16F24940216B6AC20025A061 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F2493F216B6AC20025A061 /* MenuItemCell.swift */; };
 		16F24942216B76A60025A061 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24941216B76A60025A061 /* ListController.swift */; };
+		16F24944216B7DA90025A061 /* BookMarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24943216B7DA90025A061 /* BookMarkController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		16F2493D216B625D0025A061 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		16F2493F216B6AC20025A061 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
 		16F24941216B76A60025A061 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
+		16F24943216B7DA90025A061 /* BookMarkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				1685184A216A90F800FAD779 /* MenuController.swift */,
 				1685184C216A92D000FAD779 /* HomeController.swift */,
 				16F24941216B76A60025A061 /* ListController.swift */,
+				16F24943216B7DA90025A061 /* BookMarkController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				16F24942216B76A60025A061 /* ListController.swift in Sources */,
 				16F2493E216B625D0025A061 /* ProfileImageView.swift in Sources */,
 				16851838216A85BD00FAD779 /* AppDelegate.swift in Sources */,
+				16F24944216B7DA90025A061 /* BookMarkController.swift in Sources */,
 				16F2493A216B5DAD0025A061 /* SpacerView.swift in Sources */,
 				16F24935216B3C860025A061 /* BaseSlidingControler.swift in Sources */,
 				16F24938216B57810025A061 /* CustomMenuHeaderView.swift in Sources */,
