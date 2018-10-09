@@ -187,7 +187,7 @@ class BaseSlidingController: UIViewController {
     }
     
     var rightViewController: UIViewController = UINavigationController(rootViewController: HomeController())
-    let menuController = ChatroomMenuController()
+    let menuController = ChatroomMenuContainerController()
     
     func didSelectMenuItem(indexPath: IndexPath) {
         
