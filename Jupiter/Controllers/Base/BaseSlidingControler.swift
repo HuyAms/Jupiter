@@ -42,6 +42,13 @@ class BaseSlidingController: UIViewController {
         setupViews()
         
         setupPanGesture()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss))
+        darkCoverView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc fileprivate func handleTapDismiss() {
+        closeMenu()
     }
 
     fileprivate func setupPanGesture() {
@@ -49,7 +56,8 @@ class BaseSlidingController: UIViewController {
         view.addGestureRecognizer(panGesture)
     }
     
-    var redViewLeadingConstraint: NSLayoutConstraint!
+    var rightContainerViewLeadingConstraint: NSLayoutConstraint!
+    var rightContainerViewTrailingConstraint: NSLayoutConstraint!
     fileprivate let menuWidth: CGFloat = 300
     fileprivate let velocityOpenThreshold: CGFloat = 500
     fileprivate var isMenuOpen = false
@@ -63,7 +71,8 @@ class BaseSlidingController: UIViewController {
         x = min(menuWidth, x)
         x = max(0, x)
 
-        redViewLeadingConstraint.constant = x
+        rightContainerViewLeadingConstraint.constant = x
+        rightContainerViewTrailingConstraint.constant = x
         darkCoverView.alpha = x / menuWidth
         
         if gesture.state == .ended {
@@ -108,16 +117,18 @@ class BaseSlidingController: UIViewController {
         NSLayoutConstraint.activate([
             rightContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             rightContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            rightContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
+    
             menuContainerView.topAnchor.constraint(equalTo: view.topAnchor),
-            menuContainerView.trailingAnchor.constraint(equalTo: rightContainerView.safeAreaLayoutGuide.leadingAnchor),
+            menuContainerView.trailingAnchor.constraint(equalTo: rightContainerView.leadingAnchor),
             menuContainerView.widthAnchor.constraint(equalToConstant: menuWidth),
             menuContainerView.bottomAnchor.constraint(equalTo: rightContainerView.bottomAnchor)
             ])
         
-        redViewLeadingConstraint = rightContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
-        redViewLeadingConstraint.isActive = true
+        rightContainerViewLeadingConstraint = rightContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+        rightContainerViewLeadingConstraint.isActive = true
+        
+        rightContainerViewTrailingConstraint = rightContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+        rightContainerViewTrailingConstraint.isActive = true
         
         setupViewControllers()
     }
@@ -159,13 +170,15 @@ class BaseSlidingController: UIViewController {
     
     func openMenu() {
         isMenuOpen = true
-        redViewLeadingConstraint.constant = menuWidth
+        rightContainerViewLeadingConstraint.constant = menuWidth
+        rightContainerViewTrailingConstraint.constant = menuWidth
         performAnimations()
     }
     
     func closeMenu() {
         isMenuOpen = false
-        redViewLeadingConstraint.constant = 0
+        rightContainerViewLeadingConstraint.constant = 0
+        rightContainerViewTrailingConstraint.constant = 0
         performAnimations()
     }
     
