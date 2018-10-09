@@ -134,8 +134,6 @@ class BaseSlidingController: UIViewController {
     }
     
     fileprivate func setupViewControllers() {
-        //Add HomeControllers into the redView        
-        let menuController = MenuController()
         
         let homeView = rightViewController.view!
         let menuView = menuController.view!
@@ -182,6 +180,9 @@ class BaseSlidingController: UIViewController {
         performAnimations()
     }
     
+    var rightViewController: UIViewController = UINavigationController(rootViewController: HomeController())
+    let menuController = ChatroomMenuController()
+    
     func didSelectMenuItem(indexPath: IndexPath) {
         
         performRightViewCleanUp()
@@ -211,8 +212,6 @@ class BaseSlidingController: UIViewController {
         
         rightContainerView.bringSubviewToFront(darkCoverView)
     }
-    
-    var rightViewController: UIViewController = UINavigationController(rootViewController: HomeController())
     
     fileprivate func performRightViewCleanUp() {
         rightViewController.view.removeFromSuperview()
