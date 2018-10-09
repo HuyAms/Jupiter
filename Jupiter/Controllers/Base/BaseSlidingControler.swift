@@ -171,6 +171,7 @@ class BaseSlidingController: UIViewController {
         rightContainerViewLeadingConstraint.constant = menuWidth
         rightContainerViewTrailingConstraint.constant = menuWidth
         performAnimations()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func closeMenu() {
@@ -178,6 +179,11 @@ class BaseSlidingController: UIViewController {
         rightContainerViewLeadingConstraint.constant = 0
         rightContainerViewTrailingConstraint.constant = 0
         performAnimations()
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return isMenuOpen ? .lightContent : .default
     }
     
     var rightViewController: UIViewController = UINavigationController(rootViewController: HomeController())

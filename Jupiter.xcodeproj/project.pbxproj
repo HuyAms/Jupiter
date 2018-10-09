@@ -21,6 +21,7 @@
 		16F24942216B76A60025A061 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24941216B76A60025A061 /* ListController.swift */; };
 		16F24944216B7DA90025A061 /* BookMarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24943216B7DA90025A061 /* BookMarkController.swift */; };
 		16F24946216C83450025A061 /* ChatroomMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24945216C83450025A061 /* ChatroomMenuController.swift */; };
+		16F24948216C8A4B0025A061 /* ChatroomMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24947216C8A4B0025A061 /* ChatroomMenuCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		16F24941216B76A60025A061 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		16F24943216B7DA90025A061 /* BookMarkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkController.swift; sourceTree = "<group>"; };
 		16F24945216C83450025A061 /* ChatroomMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomMenuController.swift; sourceTree = "<group>"; };
+		16F24947216C8A4B0025A061 /* ChatroomMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomMenuCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				16F24939216B5DAD0025A061 /* SpacerView.swift */,
 				16F2493D216B625D0025A061 /* ProfileImageView.swift */,
 				16F2493F216B6AC20025A061 /* MenuItemCell.swift */,
+				16F24947216C8A4B0025A061 /* ChatroomMenuCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				1685184B216A90F800FAD779 /* MenuController.swift in Sources */,
 				16F24940216B6AC20025A061 /* MenuItemCell.swift in Sources */,
 				16F24942216B76A60025A061 /* ListController.swift in Sources */,
+				16F24948216C8A4B0025A061 /* ChatroomMenuCell.swift in Sources */,
 				16F2493E216B625D0025A061 /* ProfileImageView.swift in Sources */,
 				16851838216A85BD00FAD779 /* AppDelegate.swift in Sources */,
 				16F24944216B7DA90025A061 /* BookMarkController.swift in Sources */,
