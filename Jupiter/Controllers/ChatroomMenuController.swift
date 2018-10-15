@@ -8,6 +8,36 @@
 
 import UIKit
 
+extension ChatroomMenuController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            filteredResults = chatroomGroups
+            tableView.reloadData()
+            return
+        }
+        
+//        var result = [[String]]()
+        
+//        chatroomGroups.forEach { (group) in
+//
+//            let filteredGroup = group.filter({ (chatroomName) -> Bool in
+//                return chatroomName.lowercased().contains(searchText.lowercased())
+//            })
+//
+//            result.append(filteredGroup)
+//        }
+//
+//        filteredResults = result
+        
+        filteredResults = chatroomGroups.map({ (group) -> [String] in
+            return group.filter {$0.lowercased().contains(searchText.lowercased())}
+        })
+        tableView.reloadData()
+    }
+}
+
 class ChatroomMenuController: UITableViewController {
     
     let chatroomGroups = [
@@ -15,9 +45,14 @@ class ChatroomMenuController: UITableViewController {
         ["jobs"],
         ["Barack Obama", "Steve Jobs", "Taylor Swift", "Eminem"]
     ]
+    
+    var filteredResults = [[String]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        filteredResults = chatroomGroups
+        
         tableView.backgroundColor = .purple
         tableView.separatorStyle = .none
         
@@ -36,11 +71,11 @@ class ChatroomMenuController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return filteredResults.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatroomGroups[section].count
+        return filteredResults[section].count
     }
     
     fileprivate class ChatroomHeaderLabel: UILabel {
@@ -63,7 +98,7 @@ class ChatroomMenuController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ChatroomMenuCell()
-        let text = chatroomGroups[indexPath.section][indexPath.row]
+        let text = filteredResults[indexPath.section][indexPath.row]
         cell.textLabel?.text = text
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
