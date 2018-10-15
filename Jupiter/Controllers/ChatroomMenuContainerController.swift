@@ -12,8 +12,7 @@ class ChatroomMenuContainerController: UIViewController {
     
     let chatroomMenuController = ChatroomMenuController()
     
-    let searchContainer = UIView()
-    let profileImageView = ProfileImageView()
+    let searchContainer = SearchContainerView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,31 +38,49 @@ class ChatroomMenuContainerController: UIViewController {
         searchContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         searchContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         searchContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64).isActive = true
-        
-        //SearchBar
-        let searchBar = UISearchBar()
-        searchBar.searchBarStyle = .minimal
-        searchBar.tintColor = .white
-        searchBar.placeholder = "Search"
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        searchContainer.addSubview(searchBar)
-        searchContainer.addSubview(profileImageView)
+    }
+}
 
+class SearchContainerView: UIView {
     
+    let searchBar: UISearchBar = {
+        let sb = UISearchBar()
+        sb.searchBarStyle = .minimal
+        sb.placeholder = "Search"
+        sb.translatesAutoresizingMaskIntoConstraints = false
+        return sb
+    }()
+    
+    let profileImageView: ProfileImageView = {
+        let iv = ProfileImageView(image: UIImage(named: "huy_profile"))
+        iv.contentMode = .scaleAspectFit
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 5
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    
+        addSubview(searchBar)
+        addSubview(profileImageView)
+
+        //SearchBar
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
         searchBar.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor).isActive = true
-        searchBar.trailingAnchor.constraint(equalTo: searchContainer.trailingAnchor).isActive = true
-        searchBar.bottomAnchor.constraint(equalTo: searchContainer.bottomAnchor, constant: -4).isActive = true
-        
+        searchBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
+
+
         //ProfileImage
-        profileImageView.image = #imageLiteral(resourceName: "huy_profile")
-        profileImageView.layer.cornerRadius = 5
-        profileImageView.clipsToBounds = true
-        profileImageView.contentMode = .scaleAspectFit
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).isActive = true
-        profileImageView.bottomAnchor.constraint(equalTo: searchContainer.bottomAnchor, constant: -8).isActive = true
+
+        profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        profileImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
